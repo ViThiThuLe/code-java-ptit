@@ -4,34 +4,33 @@ import java.util.Scanner;
 
 public class diem_can_bang {
 
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
-
-        while (t > 0) {
+        int p = 1;
+        while (p <= t) {
             int n = sc.nextInt();
-            int[] a = new int[n + 1];
-            int vt = -1;
-            int dt = 0, dp = 0;
-
+            int[] a = new int[n];
+            int sum = 0;
             for (int i = 0; i < n; i++) {
                 a[i] = sc.nextInt();
-                dp += a[i];
+                sum += a[i];
             }
-            
-            dp -= a[0];
-            for (int i = 1; i < n; i++) {
-                if (dt == dp) {
-                    vt = i;
+            int sum1 = 0;
+            int k = 0;
+            for (int i = 0; i < n; i++) {
+                sum1 += a[i];
+                if (sum1 - a[i] == (sum - a[i]) / 2) {
+                    k = 1;
+                    System.out.println(i + 1);
                     break;
-                } else {
-                    dt += a[i - 1];
-                    dp -= a[i];
                 }
             }
+            if (k == 0) {
+                System.out.println(-1);
+            }
 
-            System.out.println(vt);
-            t--;
+            p++;
         }
     }
 }
