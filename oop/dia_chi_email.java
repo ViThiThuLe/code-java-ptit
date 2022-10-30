@@ -1,27 +1,29 @@
 package oop;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class dia_chi_email {
-    public static String ktra(String s){
-        String [] a = s.split("\\s+");
-        s = "";
-        s += a[a.length - 1].toLowerCase();
-        for(int i = 0; i < a.length - 1; i++){
-            s += Character.toLowerCase(a[i].charAt(0));
-        }
-        return s;
-    }
-    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int t = Integer.parseInt(sc.nextLine());
+        HashMap<String, Integer> map = new HashMap<>();
+        int t = sc.nextInt();
+        sc.nextLine();
         
-        while( t > 0){
-            String s = sc.nextLine();
-            s = s.trim();
-            System.out.println(ktra(s) + "@ptit.edu.vn");
-            t--;
+        while (t-- > 0) {
+            String[] s = sc.nextLine().trim().toLowerCase().split("\\s+");
+            String res = s[s.length - 1];
+            for (int i = 0; i < s.length - 1; i++) {
+                res += s[i].charAt(0);
+            }
+            if (!map.containsKey(res)) {
+                map.put(res, 1);
+                System.out.println(res + "@ptit.edu.vn");
+            } else {
+                map.put(res, map.get(res) + 1);
+                System.out.println(res + map.get(res) + "@ptit.edu.vn");
+            }
         }
+        sc.close();
     }
 }
